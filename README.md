@@ -1,15 +1,12 @@
 # High Bill Alert (LADWP proof of concept)
-
 Warns residential customers at the halfway point of a billing cycle when they're on pace
 for a bill much higher than the same cycle last year, and says whether it looks like
 weather or something at home.
 
 ## Setup
-
     conda activate high-bill-alert     # or: pip install -r requirements.txt
 
 ## Run
-
     python backtest.py                 # table of every second-year cycle at the halfway day
     streamlit run poc_app.py           # the POC demo with the day slider
     python -m pytest -q                # tests
@@ -47,20 +44,3 @@ Rates and thresholds are constants at the top of `run_alerts.py`. To run the sam
 scratch, delete `data/alerts_out.csv` and `data/sent_alerts.csv`.
 
 ### Front end
-
-    streamlit run app.py
-
-A page for running the same job by clicking instead of typing. It uses the functions in
-`run_alerts.py`, so the logic is the same.
-
-- Pick a run date and hit **Run tonight's job**.
-- The sliders change the usage and dollar thresholds, so you can show how that changes who gets
-  an alert. Move them and hit run again.
-- The top shows how many accounts were checked, skipped, not alerted, and alerted. Under that is a
-  table with each account's result, and each alert's message shown as a text bubble.
-- The chart shows one account's running kWh this cycle vs the same cycle last year, with the
-  projection to the end of the cycle as a dashed line.
-- **Reset** deletes `alerts_out.csv` and `sent_alerts.csv` so you can rerun the same date from scratch.
-
-The sample data has 7 accounts: bought an EV (alerts), hot summer (alerts, no weather check yet),
-steady, just under 15%, under 2 years of history, commercial, and opted out.
